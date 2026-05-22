@@ -86,7 +86,8 @@ class GarageServiceOrder(models.Model):
         self.state = 'cancelled'
 
     def _notify_customer_ready(self):
-        # WhatsApp notification triggered here
+        if 'garage.whatsapp' not in self.env:
+            return
         whatsapp = self.env['garage.whatsapp'].search([], limit=1)
         if whatsapp:
             whatsapp.send_service_ready(self)

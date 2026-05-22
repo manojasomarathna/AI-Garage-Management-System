@@ -122,6 +122,8 @@ class GarageReminder(models.Model):
         ])
         for reminder in due_reminders:
             try:
+                if 'garage.whatsapp' not in self.env:
+                    continue
                 whatsapp = self.env['garage.whatsapp'].search([], limit=1)
                 if whatsapp:
                     whatsapp.send_service_reminder(reminder)
