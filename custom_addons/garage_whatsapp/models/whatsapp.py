@@ -55,7 +55,7 @@ class GarageWhatsApp(models.Model):
             return
         body = (
             f"Dear {customer.name},\n\n"
-            f"Your vehicle *{vehicle.license_plate}* ({vehicle.brand} {vehicle.model}) "
+            f"Your vehicle *{vehicle.license_plate}* ({vehicle.brand} {vehicle.vehicle_model}) "
             f"service is complete and ready for pickup.\n\n"
             f"Job Card: {service_order.name}\n"
             f"Total: LKR {service_order.total_amount:,.2f}\n\n"
@@ -74,7 +74,7 @@ class GarageWhatsApp(models.Model):
         body = (
             f"Dear {customer.name},\n\n"
             f"🔧 Service Reminder for your *{vehicle.license_plate}* "
-            f"({vehicle.brand} {vehicle.model}).\n\n"
+            f"({vehicle.brand} {vehicle.vehicle_model}).\n\n"
             f"Recommended service date: *{reminder.predicted_date}*\n"
             f"{reminder.notes or ''}\n\n"
             f"Please call us to book your appointment.\n"
@@ -93,7 +93,7 @@ class GarageWhatsApp(models.Model):
         body = (
             f"Dear {customer.name},\n\n"
             f"✅ We have received your vehicle *{vehicle.license_plate}* "
-            f"({vehicle.brand} {vehicle.model}).\n\n"
+            f"({vehicle.brand} {vehicle.vehicle_model}).\n\n"
             f"Job Card: {service_order.name}\n"
             f"We will notify you once the service is complete.\n\n"
             f"📞 {self.garage_phone}\n"

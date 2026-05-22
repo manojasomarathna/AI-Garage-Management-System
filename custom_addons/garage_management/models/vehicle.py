@@ -10,7 +10,7 @@ class GarageVehicle(models.Model):
 
     license_plate = fields.Char(string='License Plate', required=True, tracking=True)
     brand = fields.Char(string='Brand', required=True)
-    model = fields.Char(string='Model', required=True)
+    vehicle_model = fields.Char(string='Model', required=True)
     year = fields.Integer(string='Year')
     color = fields.Char(string='Color')
     vin = fields.Char(string='VIN / Chassis No')

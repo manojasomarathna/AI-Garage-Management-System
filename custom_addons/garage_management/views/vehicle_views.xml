@@ -22,7 +22,7 @@
                         <group string="Vehicle Info">
                             <field name="license_plate"/>
                             <field name="brand"/>
-                            <field name="model"/>
+                            <field name="vehicle_model"/>
                             <field name="year"/>
                             <field name="color"/>
                             <field name="vehicle_type"/>
@@ -62,7 +62,7 @@
             <list string="Vehicles">
                 <field name="license_plate"/>
                 <field name="brand"/>
-                <field name="model"/>
+                <field name="vehicle_model" string="Model"/>
                 <field name="year"/>
                 <field name="vehicle_type"/>
                 <field name="customer_id"/>
