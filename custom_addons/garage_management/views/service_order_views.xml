@@ -9,17 +9,22 @@
             <form string="Job Card">
                 <header>
                     <button name="action_start_progress" type="object" string="Start Work"
-                            invisible="state != 'draft'" class="btn-primary"/>
+                            class="btn-primary"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
                     <button name="action_quality_check" type="object" string="Quality Check"
-                            invisible="state != 'progress'" class="btn-primary"/>
+                            class="btn-primary"
+                            attrs="{'invisible': [('state', '!=', 'progress')]}"/>
                     <button name="action_ready" type="object" string="Mark Ready"
-                            invisible="state != 'quality'" class="btn-primary"/>
+                            class="btn-primary"
+                            attrs="{'invisible': [('state', '!=', 'quality')]}"/>
                     <button name="action_deliver" type="object" string="Deliver"
-                            invisible="state != 'ready'" class="btn-success"/>
+                            class="btn-success"
+                            attrs="{'invisible': [('state', '!=', 'ready')]}"/>
                     <button name="action_create_invoice" type="object" string="Create Invoice"
-                            invisible="is_invoiced or state not in ['ready','delivered']"/>
+                            attrs="{'invisible': ['|', ('is_invoiced', '=', True), ('state', 'not in', ['ready', 'delivered'])]}"/>
                     <button name="action_cancel" type="object" string="Cancel"
-                            invisible="state in ['delivered','cancelled']" class="btn-danger"/>
+                            class="btn-danger"
+                            attrs="{'invisible': [('state', 'in', ['delivered', 'cancelled'])]}"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,progress,quality,ready,delivered"/>
                 </header>
@@ -76,6 +81,8 @@
                         <field name="parts_cost" readonly="1"/>
                         <field name="total_amount" readonly="1" class="oe_subtotal_footer_separator"/>
                     </group>
+                    <!-- Hidden fields needed for attrs conditions -->
+                    <field name="is_invoiced" invisible="1"/>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
@@ -86,13 +93,15 @@
         </field>
     </record>
 
-    <!-- Service Order List View -->
+    <!-- Service Order Tree View -->
     <record id="view_garage_service_order_list" model="ir.ui.view">
-        <field name="name">garage.service.order.list</field>
+        <field name="name">garage.service.order.tree</field>
         <field name="model">garage.service.order</field>
         <field name="arch" type="xml">
-            <tree string="Job Cards" decoration-success="state=='delivered'"
-                  decoration-warning="state=='ready'" decoration-info="state=='progress'">
+            <tree string="Job Cards"
+                  decoration-success="state=='delivered'"
+                  decoration-warning="state=='ready'"
+                  decoration-info="state=='progress'">
                 <field name="name"/>
                 <field name="vehicle_id"/>
                 <field name="customer_id"/>
