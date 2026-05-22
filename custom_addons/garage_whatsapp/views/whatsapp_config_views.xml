@@ -27,22 +27,22 @@
     </record>
 
     <record id="view_garage_whatsapp_list" model="ir.ui.view">
-        <field name="name">garage.whatsapp.list</field>
+        <field name="name">garage.whatsapp.tree</field>
         <field name="model">garage.whatsapp</field>
         <field name="arch" type="xml">
-            <list string="WhatsApp Configurations">
+            <tree string="WhatsApp Configurations">
                 <field name="name"/>
                 <field name="garage_name"/>
                 <field name="garage_phone"/>
                 <field name="active"/>
-            </list>
+            </tree>
         </field>
     </record>
 
     <record id="action_garage_whatsapp" model="ir.actions.act_window">
         <field name="name">WhatsApp Configuration</field>
         <field name="res_model">garage.whatsapp</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
 </odoo>
