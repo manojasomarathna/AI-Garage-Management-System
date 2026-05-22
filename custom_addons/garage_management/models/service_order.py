@@ -118,7 +118,7 @@ class GarageServiceOrder(models.Model):
                 'quantity': line.qty,
                 'price_unit': line.unit_price,
             }))
-        invoice = self.env['account.move'].create({
+        invoice = self.env['account.move'].sudo().create({
             'move_type': 'out_invoice',
             'partner_id': self.customer_id.id,
             'invoice_line_ids': invoice_lines,
