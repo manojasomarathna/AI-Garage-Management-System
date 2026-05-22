@@ -38,14 +38,7 @@
                     </group>
                     <notebook>
                         <page string="Service History">
-                            <field name="service_order_ids" readonly="1">
-                                <list>
-                                    <field name="name" string="Job Card No"/>
-                                    <field name="date_received"/>
-                                    <field name="state"/>
-                                    <field name="total_amount"/>
-                                </list>
-                            </field>
+                            <field name="service_order_ids" readonly="1"/>
                         </page>
                         <page string="Notes">
                             <field name="notes" placeholder="Additional notes..."/>
