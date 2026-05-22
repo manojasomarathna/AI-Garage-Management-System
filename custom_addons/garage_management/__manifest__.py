@@ -19,6 +19,7 @@
     'data': [
         'security/ir.model.access.csv',
         'data/sequence_data.xml',
+        'data/cron_data.xml',
         'views/vehicle_views.xml',
         'views/service_order_views.xml',
         'views/service_history_views.xml',
