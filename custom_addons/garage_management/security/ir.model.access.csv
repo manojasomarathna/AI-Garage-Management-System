@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_garage_vehicle,garage.vehicle,model_garage_vehicle,,1,1,1,1
+access_garage_service_order,garage.service.order,model_garage_service_order,,1,1,1,1
+access_garage_service_line,garage.service.line,model_garage_service_line,,1,1,1,1
+access_garage_parts_line,garage.parts.line,model_garage_parts_line,,1,1,1,1
+access_garage_service_history,garage.service.history,model_garage_service_history,,1,1,1,1
+access_garage_reminder,garage.reminder,model_garage_reminder,,1,1,1,1

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Main Menu -->
+    <menuitem id="menu_garage_root" name="Garage" sequence="10"
+              web_icon="garage_management,static/description/icon.png"/>
+
+    <!-- Dashboard -->
+    <menuitem id="menu_garage_dashboard" name="Dashboard" parent="menu_garage_root"
+              action="action_garage_dashboard_orders" sequence="1"/>
+
+    <!-- Job Cards -->
+    <menuitem id="menu_garage_service" name="Job Cards" parent="menu_garage_root"
+              action="action_garage_service_order" sequence="2"/>
+
+    <!-- Vehicles -->
+    <menuitem id="menu_garage_vehicles" name="Vehicles" parent="menu_garage_root"
+              action="action_garage_vehicle" sequence="3"/>
+
+    <!-- History -->
+    <menuitem id="menu_garage_history" name="Service History" parent="menu_garage_root"
+              action="action_garage_service_history" sequence="4"/>
+
+    <!-- AI Reminders -->
+    <menuitem id="menu_garage_reminders" name="AI Reminders" parent="menu_garage_root"
+              action="action_garage_reminder" sequence="5"/>
+
+</odoo>

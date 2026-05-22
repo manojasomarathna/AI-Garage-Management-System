@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Service Order Form View -->
+    <record id="view_garage_service_order_form" model="ir.ui.view">
+        <field name="name">garage.service.order.form</field>
+        <field name="model">garage.service.order</field>
+        <field name="arch" type="xml">
+            <form string="Job Card">
+                <header>
+                    <button name="action_start_progress" type="object" string="Start Work"
+                            invisible="state != 'draft'" class="btn-primary"/>
+                    <button name="action_quality_check" type="object" string="Quality Check"
+                            invisible="state != 'progress'" class="btn-primary"/>
+                    <button name="action_ready" type="object" string="Mark Ready"
+                            invisible="state != 'quality'" class="btn-primary"/>
+                    <button name="action_deliver" type="object" string="Deliver"
+                            invisible="state != 'ready'" class="btn-success"/>
+                    <button name="action_create_invoice" type="object" string="Create Invoice"
+                            invisible="is_invoiced or state not in ['ready','delivered']"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            invisible="state in ['delivered','cancelled']" class="btn-danger"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,progress,quality,ready,delivered"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Vehicle &amp; Customer">
+                            <field name="vehicle_id"/>
+                            <field name="customer_id"/>
+                            <field name="mechanic_id"/>
+                        </group>
+                        <group string="Dates &amp; Mileage">
+                            <field name="date_received"/>
+                            <field name="date_promised"/>
+                            <field name="date_completed" readonly="1"/>
+                            <field name="mileage_in"/>
+                            <field name="mileage_out"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Services">
+                            <field name="service_line_ids">
+                                <list editable="bottom">
+                                    <field name="service_name"/>
+                                    <field name="description"/>
+                                    <field name="qty"/>
+                                    <field name="unit_price"/>
+                                    <field name="subtotal" readonly="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Parts Used">
+                            <field name="parts_line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="qty"/>
+                                    <field name="unit_price"/>
+                                    <field name="subtotal" readonly="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Diagnosis &amp; Notes">
+                            <group>
+                                <field name="customer_complaint" placeholder="Customer's complaint..."/>
+                                <field name="diagnosis" placeholder="Mechanic's diagnosis..."/>
+                                <field name="work_done" placeholder="Work performed..."/>
+                            </group>
+                        </page>
+                    </notebook>
+                    <group class="oe_subtotal_footer">
+                        <field name="labour_cost" readonly="1"/>
+                        <field name="parts_cost" readonly="1"/>
+                        <field name="total_amount" readonly="1" class="oe_subtotal_footer_separator"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Service Order List View -->
+    <record id="view_garage_service_order_list" model="ir.ui.view">
+        <field name="name">garage.service.order.list</field>
+        <field name="model">garage.service.order</field>
+        <field name="arch" type="xml">
+            <list string="Job Cards" decoration-success="state=='delivered'"
+                  decoration-warning="state=='ready'" decoration-info="state=='progress'">
+                <field name="name"/>
+                <field name="vehicle_id"/>
+                <field name="customer_id"/>
+                <field name="mechanic_id"/>
+                <field name="date_received"/>
+                <field name="date_promised"/>
+                <field name="state" widget="badge"
+                       decoration-success="state=='delivered'"
+                       decoration-warning="state=='ready'"
+                       decoration-info="state=='progress'"/>
+                <field name="total_amount"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="view_garage_service_order_kanban" model="ir.ui.view">
+        <field name="name">garage.service.order.kanban</field>
+        <field name="model">garage.service.order</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_kanban_small_column">
+                <field name="name"/>
+                <field name="vehicle_id"/>
+                <field name="customer_id"/>
+                <field name="state"/>
+                <field name="total_amount"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+                                <strong><field name="name"/></strong>
+                                <div><field name="vehicle_id"/></div>
+                                <div><field name="customer_id"/></div>
+                                <div class="oe_kanban_bottom_right">
+                                    <strong>LKR <field name="total_amount"/></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Service Order Action -->
+    <record id="action_garage_service_order" model="ir.actions.act_window">
+        <field name="name">Job Cards</field>
+        <field name="res_model">garage.service.order</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+</odoo>
