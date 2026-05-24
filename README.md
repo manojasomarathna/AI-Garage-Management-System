@@ -6,6 +6,19 @@ An AI-powered Garage & Vehicle Service Management ERP built on **Odoo 16** with 
 
 ---
 
+## 📸 Screenshots
+
+### Vehicle Management
+![Vehicles](screenshots/vehicles.png)
+
+### Job Cards (Kanban View)
+![Job Cards](screenshots/job_cards.png)
+
+### AI Service Reminders
+![AI Reminders](screenshots/reminders.png)
+
+---
+
 ## ✨ Features
 
 | Feature | Description |
